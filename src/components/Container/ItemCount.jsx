@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 
 
 function ItemCount ({stock, onAdd}) {
-    const [count, setCount] = useState(1)
+    const [count, setCount] = useState(0)
 
     function sumar () {
         if (count < stock){
@@ -13,7 +13,7 @@ function ItemCount ({stock, onAdd}) {
         
     }
     function restar () {
-        if (count > 1){
+        if (count > 0){
             setCount (count - 1)
         }
     }
@@ -23,22 +23,14 @@ function ItemCount ({stock, onAdd}) {
   return (
     
     <div>
-        <Card className="text-center" border="danger" style={{width:'18rem'}}>
-            <Card.Body >
-                <Card.Header>Contador</Card.Header>
-
-                <Card.Text>Stock: {stock}</Card.Text>
-
-                <Card.Text>Cantidad: {count}</Card.Text>
-
+        <Card className="text-center" style={{width:'18rem', marginRight: '1em'}}>
+        <Card.Text style={{fontWeight:"bold"}}>Cantidad: {count}</Card.Text>
                 <ButtonGroup>
-                <Button className="btn" variant="danger" onClick={restar}> - </Button>
-                <Button className="btn" variant="info" onClick={restablecer}> restablecer </Button>
-                <Button className="btn" variant="success" onClick={sumar}> + </Button>
+                <Button className="btn" variant="info" onClick={restar}> - </Button>
+                <Button className="btn" variant="primary" onClick={restablecer}> restablecer </Button>
+                <Button className="btn" variant="info" onClick={sumar}> + </Button>
                 </ButtonGroup>
-                
                 <Button variant="warning" className="btn" onClick={() => onAdd(count)}>Confirmar</Button>
-            </Card.Body>
         </Card>   
         
     </div>
