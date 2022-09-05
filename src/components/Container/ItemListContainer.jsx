@@ -1,14 +1,24 @@
 import React, {useState, useEffect} from "react";
+import { useParams } from "react-router-dom";
 import { producto } from "../Mock/productos";
 import ItemsList from "./ItemsList";
 
-const getConsultar = () => {
-    return new Promise ((res) => {
-        res(producto)
-   })
-} 
+
 
 export function ItemListContainer () {
+    const {category} = useParams()
+
+    const getConsultar = () => {
+        return new Promise ((res) => {
+            if(category){
+                res(producto.filter ((prod) => prod.category === category ))
+            }else{
+                res(producto)
+            }
+            
+       })
+    } 
+
     const [products, setProducts] = useState ([])
 
  useEffect(()=>{
@@ -16,7 +26,7 @@ export function ItemListContainer () {
     .then (data => setProducts(data))
     .catch(Error =>
         console.error(Error))
- },[])
+ },[category])
 
 
 

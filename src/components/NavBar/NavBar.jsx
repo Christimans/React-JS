@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import CartWigdet from "./CartWigdet";
 
 function NavBar() {
@@ -6,9 +7,9 @@ function NavBar() {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to={'/'}>
             Compras.com
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -23,18 +24,33 @@ function NavBar() {
           <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-                <a className="nav-link active" href="#">
+                <Link className="nav-link active" to={'/'}>
                   Incio
                   <span className="visually-hidden">(current)</span>
-                </a>
+                </Link>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Productos
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Producto
                 </a>
+                <div className="dropdown-menu">
+                  <Link className="dropdown-item" to={'/category/monitor'}>
+                    Monitor
+                  </Link>
+                  <Link className="dropdown-item" to={'/category/componentes'}>
+                    Componentes
+                  </Link>
+                </div>
               </li>
             </ul>
-            <CartWigdet/>
+            <CartWigdet />
             <form className="d-flex">
               <input
                 className="form-control me-sm-2"
@@ -53,4 +69,3 @@ function NavBar() {
 }
 
 export default NavBar;
-

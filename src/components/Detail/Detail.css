@@ -7,3 +7,6 @@
     align-items: center;
     margin-left: 1em;
 }
+.card-detail img{
+    width: 12rem;
+}

@@ -1,3 +1,4 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import { ItemListContainer } from './Container/ItemListContainer';
 import { ItemsDetailContainer } from './Detail/ItemsDetailContainer';
@@ -10,10 +11,14 @@ function App() {
 
   return (
     <>
+    <BrowserRouter>
     <NavBar/>
-    <ItemListContainer/>
-    <hr />
-    <ItemsDetailContainer/>
+    <Routes>
+      <Route path='/' element={<ItemListContainer/>}/>
+      <Route path='/category/:category' element={<ItemListContainer/>}/>
+      <Route path='/detail/:id' element={<ItemsDetailContainer/>}/>
+    </Routes>
+    </BrowserRouter>
     </>
   );
 }
