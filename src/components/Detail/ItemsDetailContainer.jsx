@@ -1,23 +1,29 @@
-import React, {useState, useEffect}from 'react'
-import { producto } from '../Mock/productos'
-import ItemsDetail from '../Detail/ItemsDetail'
-import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { producto } from "../Mock/productos";
+import ItemsDetail from "../Detail/ItemsDetail";
+import { useParams } from "react-router-dom";
+import { Spinners } from "../Spinners/Spinners";
 
 export const ItemsDetailContainer = () => {
-    const {id} = useParams()
-    const getDatos = () => {
-        return new Promise ((res) => {
-            res(producto)
-        })
-    }
-    const [datos, setDatos] = useState ([])
-    useEffect(()=>{
-        getDatos()
-        .then(res => setDatos(res.find(prod => prod.id === Number(id))))
-    },[])
-  return (
+  const { id } = useParams();
+
+  const [datos, setDatos] = useState();
+
+  useEffect(() => {
+    const getDatos = new Promise((res) =>
+      setTimeout(
+        () => res(producto.find((producto) => producto.id === Number(id))),
+        2000
+      )
+    );
+    getDatos.then((res) => setDatos(res));
+  }, []);
+
+  return datos ? (
     <div>
-        <ItemsDetail dato = {datos}/>
-    </div> 
-  )
-}
+      <ItemsDetail dato={datos} />
+    </div>
+  ) : (
+    <Spinners/>
+  );
+};

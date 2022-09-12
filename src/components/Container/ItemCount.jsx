@@ -27,10 +27,10 @@ function ItemCount ({stock, onAdd}) {
         <Card.Text style={{fontWeight:"bold"}}>Cantidad: {count}</Card.Text>
                 <ButtonGroup>
                 <Button className="btn" variant="info" onClick={restar}> - </Button>
-                <Button className="btn" variant="primary" onClick={restablecer}> restablecer </Button>
+                <Button className="btn" variant="primary" onClick={restablecer}>Cancelar</Button>
                 <Button className="btn" variant="info" onClick={sumar}> + </Button>
                 </ButtonGroup>
-                <Button variant="warning" className="btn" onClick={() => onAdd(count)}>Confirmar</Button>
+                <Button variant="warning" className="btn" onClick={() => onAdd(count)}>Agregar al carrito</Button>
         </Card>   
         
     </div>
