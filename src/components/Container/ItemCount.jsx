@@ -1,40 +1,32 @@
 import { useState } from "react";
-import { Button, ButtonGroup } from 'react-bootstrap';
-import { Card } from 'react-bootstrap';
+import { Button, Form, InputGroup } from "react-bootstrap";
 
 
-function ItemCount ({stock, onAdd}) {
-    const [count, setCount] = useState(0)
+function ItemCount({stock, onClick}) {
+  const [count, setCount] = useState(1);
 
-    function sumar () {
-        if (count < stock){
-            setCount (count + 1)
-        }
-        
+  function sumar() {
+    if (count < stock) {
+      setCount(count + 1);
     }
-    function restar () {
-        if (count > 0){
-            setCount (count - 1)
-        }
+  }
+  function restar() {
+    if (count > 0) {
+      setCount(count - 1);
     }
-    function restablecer () {
-        setCount (0)
-    }
+  }
   return (
-    
-    <div>
-        <Card className="text-center" style={{width:'18rem', marginRight: '1em'}}>
-        <Card.Text style={{fontWeight:"bold"}}>Cantidad: {count}</Card.Text>
-                <ButtonGroup>
-                <Button className="btn" variant="info" onClick={restar}> - </Button>
-                <Button className="btn" variant="primary" onClick={restablecer}>Cancelar</Button>
-                <Button className="btn" variant="info" onClick={sumar}> + </Button>
-                </ButtonGroup>
-                <Button variant="warning" className="btn" onClick={() => onAdd(count)}>Agregar al carrito</Button>
-        </Card>   
+    <div className="col-5" style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+        <InputGroup className="">
+        <InputGroup.Text id="basic-addon2" >Cantidad:</InputGroup.Text>
+        <Form.Control readOnly value={count}/>
+        <Button className="btn" variant="info" onClick={sumar}> {" "}+{" "}</Button>
+        <Button className="btn" variant="info" onClick={restar}>{" "}-{" "}</Button>
+        <Button variant="warning" className="btn" onClick={() => onClick(count)} > Agregar al carrito</Button>
+        </InputGroup>
         
     </div>
-  )
+  );
 }
 
 export default ItemCount;
