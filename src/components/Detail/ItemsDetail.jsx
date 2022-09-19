@@ -13,6 +13,8 @@ function ItemsDetail({ dato }) {
   const onAdd = (cantidad) => {
     setAddButtom(true);
     addCarrito(dato, cantidad)
+    let stockResta = dato.stock - cantidad;
+    dato.stock = stockResta;
   };
 
   return (
@@ -39,8 +41,8 @@ function ItemsDetail({ dato }) {
         </Card.Text>
         <div>
         {addButtom 
-        ? (<Link to={"/Cart"}><Button>Compra</Button></Link>) 
-        : (<ItemCount stock={dato.stock} onClick={() => onAdd ()} />) }
+        ? (<Link to={"/Cart"}><Button variant="danger" size="lg" style={{display:"flex", margin:"0 auto"}}>Compra</Button></Link>) 
+        : (<ItemCount stock={dato.stock} onClick={onAdd} />) }
           </div>
       </Card.Body>
     </Card>

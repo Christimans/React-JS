@@ -4,7 +4,7 @@ import { useCarritoContext } from "../Context/CarritoContexts";
 
 export const Carrito = ({ items }) => {
   const { itemRemove } = useCarritoContext();
-
+  
   return (
     <div style={{display:"flex"}}>
       <Card className="text-center" style={{width: "12rem", margin: "1em" }}>
@@ -14,6 +14,9 @@ export const Carrito = ({ items }) => {
         </Card.Body>
         <Card.Footer style={{ fontWeight: "bold", fontSize: "17px" }}>
           ${items.precio}
+        </Card.Footer>
+        <Card.Footer>
+        <span style={{fontWeight:"bold"}}>Cant.: {items.cantidad}</span>
         </Card.Footer>
         <Button
           variant="danger"
@@ -25,4 +28,5 @@ export const Carrito = ({ items }) => {
       </Card>
     </div>
   );
+  
 };

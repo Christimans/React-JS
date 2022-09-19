@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCarritoContext } from "../Context/CarritoContexts";
 import CartWigdet from "./CartWigdet";
 
 function NavBar() {
+ 
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
