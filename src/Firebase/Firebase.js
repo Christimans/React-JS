@@ -19,9 +19,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
-async function cargarBBDD() {
-  const promise = await fetch("../components/Mock/productos.json");
-  const productos = await promise.json();
+const cargarBBDD = async() => {
+    const promise = await fetch("./Mock/productos.js")
+    const productos = await promise.json()
   productos.forEach(async (producto) => {
     await addDoc(collection(db, "items"), {
       nombre: producto.nombre,
@@ -32,6 +32,7 @@ async function cargarBBDD() {
       stock: producto.stock,
     });
   });
+  
 }
 
 export { db, app, cargarBBDD };
