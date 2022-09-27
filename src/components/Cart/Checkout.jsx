@@ -1,11 +1,9 @@
-import { async } from "@firebase/util";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../Firebase/Firebase";
 import React from "react";
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
 import { useCarritoContext } from "../Context/CarritoContexts";
-import { clear } from "@testing-library/user-event/dist/clear";
+
 
 export const Checkout = () => {
   const [comprobanteid, setComprobanteid] = useState();
@@ -23,10 +21,10 @@ export const Checkout = () => {
   const handleInputChange = (e) => {
     setBuyer({ ...buyer, [e.target.name]: e.target.value });
   };
-  const generarOrden = async (comprobante) => {
+  const generarOrden = async (data) => {
     try {
       const col = collection(db, "ComprobantedeCompra");
-      const orden = await addDoc(col, comprobante);
+      const orden = await addDoc(col, data);
       console.log(orden);
       setComprobanteid(orden.id);
     } catch (error) {
@@ -49,46 +47,40 @@ export const Checkout = () => {
     const comprobante = { buyer, items, dia, pagototal };
     generarOrden(comprobante);
     console.log(comprobante);
-    clear()
+    clear();
   };
 
   return !comprobanteid ? (
-    <div>
+    <div style={{}}>
       <h2>Finalizar Compra</h2>
       <hr />
       <h3>Completa los siguientes datos</h3>
-      <Form onSubmit={haldleSubmit}>
-        <Form.Group
-          className="mb-3"
-          controlId="formBasicEmail"
+      <form onSubmit={haldleSubmit}>
+        <input
+          name="Nombre"
+          type="text"
           value={Nombre}
           onChange={handleInputChange}
-        >
-          <Form.Label>Nombre</Form.Label>
-          <Form.Control type="text" placeholder="Nombre" />
-        </Form.Group>
-        <Form.Group
-          className="mb-3"
-          controlId="formBasicEmail"
+          placeholder="Nombre"
+        /><br/>
+        <input
+          name="Email"
+          type="text"
           value={Email}
           onChange={handleInputChange}
-        >
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" placeholder="Enter email"  />
-        </Form.Group>
-        <Form.Group
-          className="mb-3"
-          controlId="formBasicEmail"
+          placeholder="Email"
+        /><br/>
+        <input
+          name="Telefono"
+          type="number"
           value={Telefono}
           onChange={handleInputChange}
-        >
-          <Form.Label>Telefono</Form.Label>
-          <Form.Control type="number" placeholder="Telefono" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
+          placeholder="Telefono"
+        /><br/>
+        <button className="btn btn-danger" type="submit">
           Enviar
-        </Button>
-      </Form>
+        </button>
+      </form>
     </div>
   ) : (
     <h3> Su comprobante de compra es : {comprobanteid}</h3>
