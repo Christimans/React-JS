@@ -6,7 +6,8 @@ import { useCarritoContext } from "../Context/CarritoContexts";
 
 
 export const Checkout = () => {
-  const [comprobanteid, setComprobanteid] = useState();
+  const [comprobanteid, setComprobanteid] = useState(); 
+  const [ticket, setTicket] = useState ()
 
   const { itemCart, totalCart, clear } = useCarritoContext();
 
@@ -51,7 +52,7 @@ export const Checkout = () => {
   };
 
   return !comprobanteid ? (
-    <div style={{}}>
+    <div>
       <h2>Finalizar Compra</h2>
       <hr />
       <h3>Completa los siguientes datos</h3>
